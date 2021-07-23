@@ -29,19 +29,36 @@ const ToggleDiv = styled.div`
 `;
 
 const Toggle = () => {
+
+    const [tog, setTog] = React.useState({
+        allTog: true,
+        activeTog: false,
+        completedTog: false,
+    })
+
     return (
         <>
             <Wrapper>
                 <h1>#todo</h1>
                 <ToggleDiv>
-                    <p>All</p>
-                    <p>Active</p>
-                    <p> Competed </p>
+                    <p
+                        onClick={
+                            () => (
+                                setTog({ ...tog, allTog: true, activeTog: false, completedTog: false })
+                            )}>All</p>
+                    <p onClick={
+                            () => (
+                                setTog({ ...tog, allTog: false, activeTog: true, completedTog: false })
+                            )}>Active</p>
+                    <p onClick={
+                            () => (
+                                setTog({ ...tog, allTog: false, activeTog: false, completedTog: true })
+                            )}> Competed </p>
                 </ToggleDiv>
             </Wrapper>
-            <All />
-            <Active />
-            <Completed />
+            {tog.allTog && <All/>}
+            {tog.activeTog && <Active />}
+            {tog.completedTog && <Completed />}
         </>
     )
 }
