@@ -22,7 +22,7 @@ const ToggleDiv = styled.div`
     justify-content: space-around;
     p{
         padding-bottom: 0.5em;
-        border-bottom: 2px solid #2F80ED;
+        border-bottom: none;
         border-radius: 0px;
         cursor: pointer;
     }
@@ -42,18 +42,23 @@ const Toggle = () => {
                 <h1>#todo</h1>
                 <ToggleDiv>
                     <p
+                        style={tog.allTog ? {borderBottom:'2px solid #2F80ED'}: {border: 'none'}}
+                        // style={{tog.allTog ? border: '2px solid #2F80ED': border: 'none'}}
                         onClick={
                             () => (
                                 setTog({ ...tog, allTog: true, activeTog: false, completedTog: false })
                             )}>All</p>
-                    <p onClick={
+                    <p  style={tog.activeTog ? {borderBottom:'2px solid #2F80ED'}: {border: 'none'}}
+                        onClick={
                             () => (
                                 setTog({ ...tog, allTog: false, activeTog: true, completedTog: false })
                             )}>Active</p>
-                    <p onClick={
+                    <p
+                        style={tog.completedTog ? {borderBottom:'2px solid #2F80ED'}: {border: 'none'}}
+                        onClick={
                             () => (
                                 setTog({ ...tog, allTog: false, activeTog: false, completedTog: true })
-                            )}> Competed </p>
+                            )}> Completed </p>
                 </ToggleDiv>
             </Wrapper>
             {tog.allTog && <All/>}
