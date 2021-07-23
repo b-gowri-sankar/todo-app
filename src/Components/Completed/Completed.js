@@ -1,7 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const WrapperUl = styled.ul``;
+const WrapperUl = styled.ul`
+    list-style: none;
+    li{
+        margin-top: 10px;
+    }
+    input{
+        margin-right: 10px;
+    }
+`;
 
 
 const Completed = () => {

@@ -22,8 +22,8 @@ const ToggleDiv = styled.div`
     justify-content: space-around;
     p{
         padding-bottom: 0.5em;
-        border-bottom: 6px solid #2F80ED;
-        border-radius: 6px;
+        border-bottom: 2px solid #2F80ED;
+        border-radius: 0px;
         cursor: pointer;
     }
 `;
@@ -32,7 +32,7 @@ const Toggle = () => {
     return (
         <>
             <Wrapper>
-                <h1>#todo app</h1>
+                <h1>#todo</h1>
                 <ToggleDiv>
                     <p>All</p>
                     <p>Active</p>
