@@ -1,5 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { AddTask } from '../../redux/Actions/taskAction';
 
 const Container = styled.form`
     margin-top: 10px;
@@ -24,13 +26,32 @@ const Container = styled.form`
     }
 `;
 
-const ActiveForm = () => {
+const ActiveForm = (props) => {
+
+    const [Task, setTask] = React.useState({
+        task: '',
+        active: false,
+        textDecoration: 'none',
+        checked: false,
+        
+    });
+
+
+    const submitClickListerner = (e) => {
+        e.preventDefault();
+        props.AddTask(Task)
+    }
     return (
-        <Container>
-            <input type='text' id='task' value='' placeholder='add something' />
+        <Container onSubmit={(e)=>submitClickListerner(e)}>
+            <input
+                type='text'
+                id='task'
+                value={Task.task}
+                placeholder='add something'
+                onChange={ (e) => setTask({...Task, task:e.target.value}) } required/> 
             <button>Add</button>
         </Container>
     )
 }
 
-export default ActiveForm
+export default connect(null, { AddTask })(ActiveForm);

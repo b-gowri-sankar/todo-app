@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux';
 
 const UnOrder = styled.ul`
     list-style: none;
@@ -11,25 +12,26 @@ const UnOrder = styled.ul`
     }
 `;
 
-const ActiveList = () => {
+const ActiveList = (props) => {
+    // console.log("this is execured hre",props.tasks)
     return (
         <UnOrder>
-            <li
-                style={{ textDecoration: 'none' }}>
+            {props.tasks && props.tasks.map((task) => (
+                <li
+                style={{ textDecoration: task.textDecoration }}>
                 <input
-                    type='checkbox'
-                    checked={false} />
-                this is second
+                        type='checkbox'
+                        checked={task.checked} key={task.id}/>
+                    {task.task}
             </li>
-            <li
-                style={{ textDecoration: 'none' }}>
-                <input
-                    type='checkbox'
-                    checked={false} />
-                this is second
-            </li>
+            ))}
         </UnOrder>
     )
 }
 
-export default ActiveList
+const mapStateToProps = state => ({
+    tasks: state.task.active_task
+}
+)
+
+export default connect(mapStateToProps)(ActiveList)
