@@ -1,4 +1,4 @@
-import { ADDTASK, COMPLETE_TASK, UNDONE_TASK } from "../types";
+import { ADDTASK, COMPLETE_TASK, REMOVE_TASK, UNDONE_TASK } from "../types";
 import { v4 as uuidv4 } from 'uuid';
 
 export const AddTask = (task) => disptach => {
@@ -24,5 +24,12 @@ export const UndoneTask = (task) => dispatch => {
         type: UNDONE_TASK,
         payload:{ ...task, textDecoration: 'none', checked: false}
     })
+}
 
+export const RemoveTask = (id) => dispatch => {
+
+    dispatch({
+        type: REMOVE_TASK,
+        payload:id
+    })
 }

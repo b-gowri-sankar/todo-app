@@ -1,4 +1,4 @@
-import { ADDTASK, COMPLETE_TASK, UNDONE_TASK } from "../types";
+import { ADDTASK, COMPLETE_TASK, REMOVE_TASK, UNDONE_TASK } from "../types";
 
 
  const initState = {
@@ -36,6 +36,13 @@ const reducer = (state = initState, action) => {
                 ],
                 completed_tasks: [
                     ...state.completed_tasks.filter(task => task.id !== action.payload.id)
+                ]
+            }
+        case REMOVE_TASK:
+            return {
+                ...state,
+                completed_tasks: [
+                    ...state.completed_tasks.filter(task => task.id !== action.payload)
                 ]
             }
         default:
