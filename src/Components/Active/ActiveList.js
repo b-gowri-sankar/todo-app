@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux';
+import { CompleteTask } from '../../redux/Actions/taskAction';
 
 const UnOrder = styled.ul`
     list-style: none;
@@ -9,19 +10,24 @@ const UnOrder = styled.ul`
     }
     input{
         margin-right: 10px;
+        cursor: pointer;
     }
 `;
 
 const ActiveList = (props) => {
-    // console.log("this is execured hre",props.tasks)
+
+    const listClickListener = (task) => {
+        props.CompleteTask(task)
+    }
+
     return (
         <UnOrder>
             {props.tasks && props.tasks.map((task) => (
-                <li
+                <li key={task.id}
                 style={{ textDecoration: task.textDecoration }}>
                 <input
                         type='checkbox'
-                        checked={task.checked} key={task.id}/>
+                        checked={task.checked} readOnly onClick={ ()=> listClickListener(task)}/>
                     {task.task}
             </li>
             ))}
@@ -30,8 +36,8 @@ const ActiveList = (props) => {
 }
 
 const mapStateToProps = state => ({
-    tasks: state.task.active_task
+    tasks: state.task.active_tasks
 }
 )
 
-export default connect(mapStateToProps)(ActiveList)
+export default connect(mapStateToProps, { CompleteTask})(ActiveList)

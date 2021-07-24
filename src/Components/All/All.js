@@ -17,19 +17,12 @@ const All = () => {
         <>
             <ActiveForm />
             <UnOrder>
-                <li style={{textDecoration:'line-through'}}><input type='checkbox' checked={ true}/>this is first</li>
+                <li style={{textDecoration:'line-through'}}><input type='checkbox' checked={ true} readOnly/>this is first</li>
                 <li
                     style={{ textDecoration: 'none' }}>
                     <input
                         type='checkbox'
-                        checked={false} />
-                    this is second
-                </li>
-                <li
-                    style={{ textDecoration: 'none' }}>
-                    <input
-                        type='checkbox'
-                        checked={false} />
+                        checked={false} readOnly/>
                     this is second
                 </li>
             </UnOrder>

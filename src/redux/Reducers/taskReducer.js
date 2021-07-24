@@ -1,27 +1,41 @@
-import { ADDTASK } from "../types";
+import { ADDTASK, COMPLETE_TASK, UNDONE_TASK } from "../types";
 
 
  const initState = {
-    tasks: [],
-    completed_task: [],
-    active_task: []
+    completed_tasks: [],
+    active_tasks: []
 };
 
 const reducer = (state = initState, action) => {
     switch (action.type) {
         case ADDTASK:
-            // console.log(action.payload)
-            // const tasks = tasks.unshift(action.payload);
-            // const active_task.unshift(action.payload);
-            
             return {
                 ...state,
-                tasks: [action.payload,
-                    ...state.tasks
-                ],
-                active_task: [
+                active_tasks: [
                     action.payload,
-                    ...state.active_task
+                    ...state.active_tasks
+                ]
+            }
+        case COMPLETE_TASK:            
+            return {
+                ...state,
+                completed_tasks: [
+                    action.payload,
+                    ...state.completed_tasks
+                ],
+                active_tasks: [
+                    ...state.active_tasks.filter(task => task.id !== action.payload.id)
+                ]
+            }
+        case UNDONE_TASK:
+            return {
+                ...state,
+                active_tasks: [
+                    action.payload,
+                    ...state.active_tasks
+                ],
+                completed_tasks: [
+                    ...state.completed_tasks.filter(task => task.id !== action.payload.id)
                 ]
             }
         default:
