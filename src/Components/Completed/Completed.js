@@ -2,8 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux';
 import { UndoneTask } from '../../redux/Actions/taskAction';
-import Delete from '../../Images/delete.svg'
+import Delete from '../../Images/delete.svg';
+import DeleteWhite from '../../Images/deleteWhite.svg'
 import { RemoveTask } from '../../redux/Actions/taskAction';
+import { RemoveAllTasks } from '../../redux/Actions/taskAction';
 
 const WrapperUl = styled.ul`
     list-style: none;
@@ -20,6 +22,27 @@ const WrapperUl = styled.ul`
     }
 `;
 
+const Button = styled.a`
+    display: flex;
+    border: none;
+    float: right;
+    color: whitesmoke;
+    margin-top: 10px;
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 14px;
+    justify-content: flex-end;
+    background-color:#EB5757;
+    width: max-content;
+    cursor: pointer;
+    span{
+        align-self: center;
+        
+    }
+
+;
+`;
+
 
 const Completed = (props) => {
 
@@ -30,8 +53,12 @@ const Completed = (props) => {
     const clickRemoveListener = (id) => {
         props.RemoveTask(id)
     }
+    const removeAllTasks = () => {
+        props.RemoveAllTasks()
+    }
 
     return (
+        <>
         <WrapperUl>
 
             {props.tasks && props.tasks.map((task) => (
@@ -49,7 +76,9 @@ const Completed = (props) => {
                     </div>
                 </li>
             ))}
-        </WrapperUl>
+            </WrapperUl>
+           {props.tasks.length === 0 ? null :  <Button onClick={()=>removeAllTasks()}><img src={DeleteWhite} alt='delte icon'/> <span> Delete All</span></Button>}
+        </>
     )
 }
 
@@ -59,4 +88,4 @@ const mapStateToProps = state => (
     }
 )
 
-export default connect(mapStateToProps, {UndoneTask, RemoveTask})(Completed)
+export default connect(mapStateToProps, {UndoneTask, RemoveTask, RemoveAllTasks})(Completed)
