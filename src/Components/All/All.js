@@ -1,6 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import ActiveForm from '../Active/ActiveForm';
+import Completed from '../Completed/Completed';
+import Active from '../Active/Active';
+
 
 const UnOrder = styled.ul`
     list-style:none;
@@ -15,19 +18,11 @@ const UnOrder = styled.ul`
 const All = () => {
     return (
         <>
-            <ActiveForm />
-            <UnOrder>
-                <li style={{textDecoration:'line-through'}}><input type='checkbox' checked={ true} readOnly/>this is first</li>
-                <li
-                    style={{ textDecoration: 'none' }}>
-                    <input
-                        type='checkbox'
-                        checked={false} readOnly/>
-                    this is second
-                </li>
-            </UnOrder>
+            <Active />
+            <Completed />
         </>
     )
 }
+
 
 export default All

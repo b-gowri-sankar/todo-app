@@ -40,6 +40,7 @@ const ActiveForm = (props) => {
     const submitClickListerner = (e) => {
         e.preventDefault();
         props.AddTask(Task)
+        setTask({...Task, task: ''})
     }
     return (
         <Container onSubmit={(e)=>submitClickListerner(e)}>
